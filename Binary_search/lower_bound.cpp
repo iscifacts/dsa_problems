@@ -36,6 +36,28 @@ int upper_bound(int arr[],int n,int key)
     }
     return idx;
 }
+int search_insert_position(int arr[],int n,int key)
+{
+   int s=0;
+   int e=n-1;
+   int ans=n;
+   while(s<=e)
+   {
+    int mid=s+(e-s)/2;
+       if(arr[mid]>=key)
+       {
+        ans=mid;
+        e=mid-1;
+       }
+       else
+       {
+        s=mid+1;
+       }
+
+   }
+   return ans;
+}
+
 int main()
 {
     int n;
@@ -49,5 +71,10 @@ int main()
     cout<<"Lower Index: "<<lower_index<<endl;
     cout<<"Upper Index: "<<upper_index<<endl;
     cout<<"Frequency: "<<freq+1<<endl;
+    int ele;
+    cout<<"Enter element to insert: ";
+    cin>>ele;
+    int pos=search_insert_position(arr,n,ele);
+    cout<<pos<<endl;
     return 0;
 }
