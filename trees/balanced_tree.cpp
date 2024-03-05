@@ -43,13 +43,25 @@ int check_optimal(node* root)
     if(root==NULL)
     return 0;
     int lh=check_optimal(root->left);
+    if(lh ==-1)
+    return -1;
     int rh=check_optimal(root->right);
-    if(lh==-1 || rh==-1)
+    if(rh==-1)
     return -1;
     else if(abs(lh-rh)>1)
     return -1;
     else
     return max(lh,rh)+1;
+}
+// diameter of tree is the distance between two nodes .Root node may or may not be inclusive.
+int diameter(node* root,int maxi)
+{
+   if(root == NULL)
+   return 0;
+   int lh=diameter(root->left,maxi);
+   int rh=diameter(root->right,maxi);
+   maxi=max(maxi,lh+rh);
+   return 1+max(lh,rh);
 
 }
 int main()
@@ -57,17 +69,21 @@ int main()
     node* root=new node(1);
     root->left=new node(2);
     root->right=new node(3);
-   // root->left->right=new node(4);
-    // root->left->left=new node(5);
-    // root->left->left->left=new node(6);
+    root->left->right=new node(4);
+    root->left->left=new node(5);
+    root->left->left->left=new node(6);
 
     bool ans=check_brute(root);
     cout<<"From Brute force "<<ans<<endl;
-    bool ans2=check_optimal(root);
+    int ans2=check_optimal(root);
     cout<<"From Optimal approach"<<endl;
     if(ans2!=-1)
     cout<<"1"<<endl;
     else
     cout<<"0"<<endl;
+    int maxi=0;
+    int d=diameter(root,maxi);
+    cout<<"The diameter of the given binary tree is: "<<d<<endl;
+
     
 }
