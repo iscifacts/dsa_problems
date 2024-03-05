@@ -64,6 +64,14 @@ int diameter(node* root,int maxi)
    return 1+max(lh,rh);
 
 }
+int maximum_path(node* root)
+{
+    if(root==NULL)
+    return 0;
+    int lh=maximum_path(root->left);
+    int rh=maximum_path(root->right);
+    return root->data + max(lh,rh);
+}
 int main()
 {
     node* root=new node(1);
@@ -84,6 +92,8 @@ int main()
     int maxi=0;
     int d=diameter(root,maxi);
     cout<<"The diameter of the given binary tree is: "<<d<<endl;
+    int sum=maximum_path(root);
+    cout<<"The Maximum Path sum is: "<<sum<<endl;
 
     
 }
