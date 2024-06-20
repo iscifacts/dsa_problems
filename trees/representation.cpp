@@ -11,6 +11,23 @@ struct Node{
         left=right=NULL;
     }
 };
+Node* build_tree(Node* root)
+{
+    int d;
+    cin>>d;
+    
+    if(d==-1)
+   return NULL;
+   root=new Node(d);
+  // root->data=d;
+   
+   root->left=build_tree(root->left);
+   
+   root->right=build_tree(root->right);
+   return root;
+
+
+}
 void preOrder(Node* root)
 {
     if(root==NULL)
@@ -39,10 +56,13 @@ void postOrder(Node* root)
 }
 int main()
 {
-    struct Node* root=new Node(1);
-    root->left=new Node(2);
-    root->right=new Node(3);
-    root->left->right=new Node(4);
+    Node* root=NULL;
+
+    
+    // root->left=new Node(2);
+    // root->right=new Node(3);
+    // root->left->right=new Node(4);
+    root=build_tree(root);
     cout<<"PreOrder Traversal"<<endl;
     preOrder(root);
     cout<<endl;
